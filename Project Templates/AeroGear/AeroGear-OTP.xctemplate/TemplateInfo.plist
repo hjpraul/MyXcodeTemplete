@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+   <dict>
+      <key>Identifier</key>
+      <string>org.aerogear.template.project.AeroGear-OTP</string>
+      <key>Name</key>
+      <string>AeroGear OTP Dependency</string>
+      <key>Ancestors</key>
+      <array />
+      <key>Description</key>
+      <string />
+      <key>Kind</key>
+      <string>Xcode.Xcode3.ProjectTemplateUnitKind</string> 
+      <key>Options</key>
+      <array>
+         <dict>
+            <key>Default</key>
+            <string>false</string>
+            <key>Description</key>
+            <string>Indicates whether the application should include the AeroGear OTP library</string>
+            <key>Identifier</key>
+            <string>otp</string>
+            <key>Name</key>
+            <string>OTP (TOTP) - Time-based One-Time Password</string>
+            <key>SortOrder</key>
+            <integer>2</integer>
+            <key>Type</key>
+            <string>checkbox</string>
+            <key>Units</key>
+            <dict>
+               <key>true</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>../Podfile:otp</key>
+                     <string>pod &apos;AeroGear-OTP&apos;, &apos;1.0.1&apos;</string>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>../Podfile:otp</string>
+                  </array>
+               </dict>
+            </dict>
+         </dict>
+      </array>
+      <key>SortOrder</key>
+      <integer>1</integer>
+   </dict>
+</plist>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+   <dict>
+      <key>Identifier</key>
+      <string>org.aerogear.template.project.AeroGear-Push</string>
+      <key>Name</key>
+      <string>AeroGear Push Dependency</string>
+      <key>Ancestors</key>
+      <array />
+      <key>Description</key>
+      <string />
+      <key>Kind</key>
+      <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+      <key>Options</key>
+      <array>
+         <dict>
+            <key>Default</key>
+            <string>false</string>
+            <key>Description</key>
+            <string>Indicates whether the application should include AeroGear Push Support</string>
+            <key>Identifier</key>
+            <string>otp</string>
+            <key>Name</key>
+            <string>Enable 'Push' support</string>
+            <key>SortOrder</key>
+            <integer>2</integer>
+            <key>Type</key>
+            <string>checkbox</string>
+            <key>Units</key>
+            <dict>
+               <key>true</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>../Podfile:push</key>
+                     <string>pod &apos;AeroGear-Push&apos;, &apos;1.0.0&apos;</string>
+                     <key>AppDelegate.m:implementation:push</key>
+                     <string>#pragma mark - Push Notification handling
+
+// Upon successfully registration with APNS, we register the device to 'AeroGear Push Server' 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken 
+{
+    // initialize "Registration helper" object using the
+    // base URL where the "AeroGear Unified Push Server" is running.
+    AGDeviceRegistration *registration =
+    
+        [[AGDeviceRegistration alloc] initWithServerURL:[NSURL URLWithString:@"&lt;# URL of the running AeroGear UnifiedPush Server #&gt;"]];
+    
+    // perform registration of this device
+    [registration registerWithClientInfo:^(id&lt;AGClientDeviceInformation&gt; clientInfo) {
+        // set up configuration parameters
+
+        // apply the deviceToken as received by Apple's Push Notification service
+        [clientInfo setDeviceToken:deviceToken];
+
+        // You need to fill the 'Variant Id' together with the 'Variant Secret'
+        // both received when performing the variant registration with the server.
+        // See section "Register an iOS Variant" in the guide:
+        // http://aerogear.org/docs/guides/aerogear-push-ios/unified-push-server/
+        [clientInfo setVariantID:@"&lt;# Variant Id #&gt;"];
+        [clientInfo setVariantSecret:@"&lt;# Variant Secret #&gt;"];
+        
+        // --optional config--
+        // set some 'useful' hardware information params
+        UIDevice *currentDevice = [UIDevice currentDevice];
+        
+        [clientInfo setOperatingSystem:[currentDevice systemName]];
+        [clientInfo setOsVersion:[currentDevice systemVersion]];
+        [clientInfo setDeviceType: [currentDevice model]];
+
+    } success:^() {
+        // successfully registered!
+        NSLog(@"UPS registration worked");
+
+    } failure:^(NSError *error) {
+        // An error occurred during registration.
+        // Let's log it for now
+        NSLog(@"UPS registration Error: %@", error);
+    }];
+}
+
+// Callback called after failing to register with APNS
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    // Log the error for now
+    NSLog(@"APNs Error: %@", error);
+}
+
+// When the program is in the foreground, this callback receives the Payload of the received Push Notification message
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // 'userInfo' contains information related to the remote notification.
+    
+}
+
+// Uncomment if you want to support 'silent' Push Notifications. iOS 7 will call this method (if implemented)
+// instead of the standard didReceiveRemoteNotification: to handle the incoming push notification.
+//
+// Note: If your application has no need for background processing, using the didReceiveRemoteNotification:
+//       method is recommended.
+/*
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // 'userInfo' contains information related to the remote notification.
+
+    // should always be called at the end of processing so
+    // the system can take a UI snapshot of the application.
+    //completionHandler(UIBackgroundFetchResultNewData);
+
+}
+*/</string>
+<key>AppDelegate.m:implementation:methods:applicationdidFinishLaunchingWithOptions:body:setup:push</key>
+            <string>// register with Apple Push Notification Service (APNS)
+// to retrieve the device token.
+// Note: when running under iOS 8 we will use the new API for APNS registration
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+    UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+} else {
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+}   
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+#endif
+ </string>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>../Podfile:push</string>
+                     <string>AppDelegate.m:implementation:methods:applicationdidFinishLaunchingWithOptions:body:setup:push</string>
+                     <string>AppDelegate.m:implementation:push</string>
+                      <string>AppDelegate.m:imports:importHeader:AeroGearPush.h</string>                                          
+                  </array>
+               </dict>
+            </dict>
+         </dict>
+      </array>
+      <key>SortOrder</key>
+      <integer>1</integer>
+   </dict>
+</plist>

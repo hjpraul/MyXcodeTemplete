@@ -8,86 +8,56 @@
 
 #import "___FILEBASENAME___.h"
 
-//#define <#macro#> <#value#>
-
-
 @interface ___FILEBASENAMEASIDENTIFIER___ ()
-
-//@property (nonatomic, strong) <#type#> *<#name#>
-
 @end
 
 @implementation ___FILEBASENAMEASIDENTIFIER___
 
 
 #pragma mark - View Controller LifeCyle
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-    }
-    return self;
-}   
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initialNavigationBar];
+    [self initView];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
-    [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Override
-
-#pragma mark - Initial Methods
-
-- (void)initialNavigationBar
-{
-//    self.navigationItem.title = <#title#>;
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"xxx"]) {
+//        XXXVC *vc = segue.destinationViewController;
+//        vc.account = _account.text;
+//    }
 }
 
 
-#pragma mark - Target Methods
+#pragma mark - Override
 
+#pragma mark - Initial && Refresh
+- (void)initView {
+    // FIXME:
+}
 
-#pragma mark - Notification Methods
+- (void)refreshView {
+    // FIXME:
+}
+#pragma mark - Privat Methods
 
+#pragma mark - Public Methods
 
-#pragma mark - KVO Methods
+#pragma mark - KVO && Notification
 
+#pragma mark - Check input
+- (BOOL) checkInput {
+    // FIXME:
+    return YES;
+}
 
-#pragma mark - UITableViewDelegate, UITableViewDataSource
-
-
-#pragma mark - Privater Methods
-
-
-#pragma mark - Setter Getter Methods
-
-
-
+#pragma mark - Action Methods
 
 @end

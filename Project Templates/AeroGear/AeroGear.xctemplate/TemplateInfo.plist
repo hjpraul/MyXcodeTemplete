@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+   <dict>
+      <key>Identifier</key>
+      <string>org.aerogear.template.project.AeroGear</string>
+      <key>Name</key>
+      <string>AeroGear Dependency</string>
+      <key>Ancestors</key>
+      <array />
+      <key>Description</key>
+      <string />
+      <key>Kind</key>
+      <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+      <key>Options</key>
+      <array>
+         <dict>
+            <key>Identifier</key>
+            <string>pipeline</string>
+            <key>Required</key>
+            <true />
+            <key>Name</key>
+            <string>Pipeline support</string>
+            <key>Description</key>
+            <string>Whether the application will include Pipeline support</string>
+            <key>NotPersisted</key>
+            <true />
+            <key>Type</key>
+            <string>checkbox</string>
+            <key>Default</key>
+            <string>true</string>
+            <key>Units</key>
+            <dict>
+               <key>true</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>../Podfile:aerogear</key>
+                     <string>pod &apos;AeroGear&apos;, &apos;1.6.1&apos;</string>
+                     <key>importSystemConfiguration</key>
+                     <string>#import &lt;SystemConfiguration/SystemConfiguration.h&gt;</string>
+                     <key>importCoreServices</key>
+                     <string>#import &lt;MobileCoreServices/MobileCoreServices.h&gt;</string>
+                     <key>AppDelegate.h:interface:navigation</key>
+                     <string>@property (strong, nonatomic) UINavigationController *navigationController;</string>
+                     <key>AppDelegate.m:implementation:methods:applicationdidFinishLaunchingWithOptions:body:setup</key>
+                     <string>UIViewController *viewController = [[ViewController alloc] initWithStyle:UITableViewStylePlain];
+self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+self.window.rootViewController = self.navigationController;</string>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>../Podfile:aerogear</string>     
+                     <string>AppDelegate.h:interface:navigation</string>      
+                     <string>AppDelegate.m:imports:importHeader:ViewController.h</string>                     
+                     <string>AppDelegate.m:implementation:methods:applicationdidFinishLaunchingWithOptions:body:setup</string>                     
+                     <string>___PACKAGENAME___-Prefix.pch:objC:importSystemConfiguration</string>
+                     <string>___PACKAGENAME___-Prefix.pch:objC:importCoreServices</string>
+                  </array>
+               </dict>
+            </dict>
+         </dict>
+         <dict>
+            <key>Identifier</key>
+            <string>authType</string>
+            <key>Name</key>
+            <string>Authentication Type</string>
+            <key>Description</key>
+            <string>Which authentication type to enable by default</string>
+            <key>NotPersisted</key>
+            <true />
+            <key>Type</key>
+            <string>popup</string>
+            <key>Default</key>
+            <string>None</string>
+            <key>RequiredOptions</key>
+            <dict>
+               <key>pipeline</key>
+               <string>true</string>
+            </dict>
+            <key>Units</key>
+            <dict>
+               <key>None</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>Classes/Service/APIClient.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.None/APIClient.h</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Service/APIClient.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.None/APIClient.m</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.None/ViewController.h</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.None/ViewController.m</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>Classes/Controllers/ViewController.h</string>
+                     <string>Classes/Controllers/ViewController.m</string>
+                     <string>Classes/Service/APIClient.h</string>
+                     <string>Classes/Service/APIClient.m</string>
+                  </array>
+               </dict>
+               <key>HTTP Basic</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>Classes/Service/APIClient.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/APIClient.h</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Service/APIClient.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/APIClient.m</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/ViewController.h</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/ViewController.m</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>Classes/Controllers/ViewController.h</string>
+                     <string>Classes/Controllers/ViewController.m</string>
+                     <string>Classes/Service/APIClient.h</string>
+                     <string>Classes/Service/APIClient.m</string>
+                  </array>
+               </dict>
+               <key>HTTP Digest</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>Classes/Service/APIClient.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/APIClient.h</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Service/APIClient.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/APIClient.m</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/ViewController.h</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.BasicDigest/ViewController.m</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>Classes/Controllers/ViewController.h</string>
+                     <string>Classes/Controllers/ViewController.m</string>
+                     <string>Classes/Service/APIClient.h</string>
+                     <string>Classes/Service/APIClient.m</string>
+                  </array>
+               </dict>
+               <key>AeroGear Security</key>
+               <dict>
+                  <key>Definitions</key>
+                  <dict>
+                     <key>Classes/Service/APIClient.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.AGSecurity/APIClient.h</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Service/APIClient.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.AGSecurity/APIClient.m</string>
+                        <key>Group</key>
+                        <key>Service</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.h</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.AGSecurity/ViewController.h</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                     <key>Classes/Controllers/ViewController.m</key>
+                     <dict>
+                        <key>Path</key>
+                        <string>Auth.AGSecurity/ViewController.m</string>
+                        <key>Group</key>
+                        <key>Controllers</key>
+                     </dict>
+                  </dict>
+                  <key>Nodes</key>
+                  <array>
+                     <string>Classes/Controllers/ViewController.h</string>
+                     <string>Classes/Controllers/ViewController.m</string>
+                     <string>Classes/Service/APIClient.h</string>
+                     <string>Classes/Service/APIClient.m</string>
+                  </array>
+               </dict>
+            </dict>
+         </dict>
+      </array>
+      <key>SortOrder</key>
+      <integer>1</integer>
+   </dict>
+</plist>
